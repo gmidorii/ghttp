@@ -2,7 +2,6 @@ package ghttp
 
 import (
 	"fmt"
-	"io/ioutil"
 	"net/http"
 )
 
@@ -14,7 +13,7 @@ func execGet(g GHttp) (body []byte, err error) {
 	}
 	defer resp.Body.Close()
 
-	return ioutil.ReadAll(resp.Body)
+	return branchStatusCode(*resp)
 }
 
 func buildQuery(m map[string]string) string {
@@ -26,5 +25,5 @@ func buildQuery(m map[string]string) string {
 }
 
 func buildGet(g GHttp, q string) string {
-	return fmt.Sprintf("%s://%s%s?%s", g.Protocol, g.Domain, g.Path, q)
+	return fmt.Sprintf("%s?%s", g.getURL(), q)
 }
