@@ -59,7 +59,9 @@ func (g *GHttp) Exec() ([]byte, error) {
 	case POST:
 		return execPost(*g)
 	case DELETE:
+		return execDelete(*g)
 	case PUT:
+		return execPut(*g)
 	default:
 		return nil, fmt.Errorf("unexpected method: %v", g.Method)
 	}
